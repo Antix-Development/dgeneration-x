@@ -2260,8 +2260,8 @@ resetOptions = (target = {}) => {
             name: 'font-weight',
             rootStyle: '--document-description-font-weight',
             kind: '',
-            default: 280,
-            value: 280,
+            default: 300,
+            value: 300,
             min: 100,
             max: 1000,
             step: 20
@@ -2471,8 +2471,8 @@ resetOptions = (target = {}) => {
             name: 'font-weight',
             rootStyle: '--block-body-font-weight',
             kind: '',
-            default: 280,
-            value: 280,
+            default: 300,
+            value: 300,
             min: 100,
             max: 1000,
             step: 20
