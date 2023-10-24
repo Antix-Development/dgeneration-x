@@ -26,6 +26,8 @@ DGeneration-X probably contains other features that some more picky people might
 
 ## Caveats
 
+I just discovered that 'window.showSaveFilePicker is not a function' in FireFox! For now DGeneration-X only works with Chrome, Edge, and Opera browsers. What a downer :(
+
 There will certainly exist more robust, comprehensive, and efficient methods to generate such documentation, but at the time I was really having fun dissecting and parsing text files, so I just kind of made it.
 
 DGeneration-X is fussy. It really doesn't take kindly to badly formatted source code (or what it considers to be badly formatted source code). If your output looks a bit like digital vomit, then DGeneration-X probably didn't appreciate the spaghetti code you fed it.
