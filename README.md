@@ -26,6 +26,8 @@ DGeneration-X probably contains other features that some more picky people might
 
 ## Caveats
 
+DGeneration-X needs to be run on a real web server, it won;t work just running it from it's folder. This means you will have to host it online, or locally using something like [WampServer](https://www.wampserver.com/).
+
 I just discovered that 'window.showSaveFilePicker is not a function' in FireFox! For now DGeneration-X only works with Chrome, Edge, and Opera browsers. What a downer :(
 
 There will certainly exist more robust, comprehensive, and efficient methods to generate such documentation, but at the time I was really having fun dissecting and parsing text files, so I just kind of made it.
