@@ -6,17 +6,14 @@ Basically it reads in JavaScript source code files and creates HTML documentatio
 
 DGeneration-X was initially created to generate documentation for [LittleJS](https://github.com/KilledByAPixel/LittleJS), but is now to be used for generating documentation for my own personal projects. I have made it available to the public on the off chance that somebody might find it of use.
 
-<br>
 
-# What's New?
+## What's New?
 
 v1.0.0 (24 Oct 2023)
 
 - Initial public release.
 
-<br>
-
-# Features
+## Features
 
 DGeneration-X Includes a basic "good enough for me" CSS style editor which provides functionality to tweak the layout of the content it generates. It currently does not support color theme editing.
 
@@ -24,9 +21,7 @@ DGeneration-X generated HTML documentation features light and dark color themes.
 
 DGeneration-X probably contains other features that some more picky people might consider bugs. If you find one then please raise an issue and I'll try to resolve it :)
 
-<br>
-
-# Caveats
+## Caveats
 
 There will certainly exist more robust, comprehensive, and efficient methods to generate such documentation, but at the time I was really having fun dissecting and parsing text files, so I just kind of made it.
 
@@ -52,9 +47,7 @@ Other JsDoc tags should be ignored but could possibly cause unexpected behavior 
 
 DGeneration-X has been tested working in FireFox and Chrome on Windows 10. I am unable to test on other Operating Systems and really CBF testing in other weird browsers, sorry :)
 
-<br>
-
-# How To Use
+## How To Use
 
 The `dgenerationx.json` file contains all of the information required for DGeneration-X to generate your HTML documentation.
 
@@ -95,9 +88,7 @@ If everything went well then you can fiddle about with the CSS styling a bit bef
 
 If everything turned to custard then maybe your JavaScript files had some bad formatting or something. I dunno, it works for my test project (LittleJS) perfectly :D
 
-<br>
-
-# How Does It Work?
+## How Does It Work?
 
 Once a JavaScript file is loaded:
 
@@ -117,7 +108,7 @@ Once the JavaScript files have been processed and all of the HTML has been gener
 
 That final string can then be saved as a single line file containing all HTML/CSS/JavaScript, and which has been minified as much as possible without leveraging a 3rd party "thing" like Terser or Closure Compiler.
 
-# Thanks
+## Thanks
 
 Thanks for checking out DGeneration-X, the coolest dumb documentation generator ever!
 
