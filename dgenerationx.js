@@ -7,20 +7,7 @@
 // MIT License:
 // 
 
-// const 
-// // Project details.
-// projectName = 'LittleJS';
-
 /* clip_start */
-
-// Project details.
-// const 
-// projectURL = 'https://killedbyapixel.github.io/LittleJS/',
-// projectRepositoryURL = 'https://github.com/KilledByAPixel/LittleJS/',
-
-// Author details.
-// authorName = 'Frank Force',
-// authorURL = 'https://frankforce.com/';
 
 const 
 
