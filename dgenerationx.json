@@ -1,0 +1,31 @@
+{
+  "projectName": "LittleJS",
+  "projectTag": "The Tiny Javascript Engine That Can",
+
+  "projectURL": "https://killedbyapixel.github.io/LittleJS/",
+  "projectRepositoryURL": "https://github.com/KilledByAPixel/LittleJS/",
+
+  "authorName": "Frank Force",
+  "authorURL": "https://frankforce.com/",
+
+  "filePath": "js/",
+
+  "fileNames": [
+    "engine", 
+    "engineAudio", 
+    "engineDebug", 
+    "engineDraw", 
+    "engineExport", 
+    "engineInput", 
+    "engineMedals", 
+    "engineObject", 
+    "engineParticles", 
+    "engineSettings", 
+    "engineTileLayer", 
+    "engineUtilities", 
+    "engineWebGL"
+  ],
+
+  "displayDebugInfo": false,
+  "displayWorklog": false
+}

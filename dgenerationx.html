@@ -1,0 +1,641 @@
+<!-- 
+  DGeneration-X - A Javascript documentation generator.
+
+  Copyright (c) 2023 Cliff Earl.
+
+  MIT License:
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title id="pagetitle"></title>
+    <link rel="icon" href="favicon.png">
+
+    <style>
+
+      :root {
+       
+        /* Static (unaffected when theme changed). */
+        --monospace-font: 'Courier New', Courier, monospace;
+        --scroll-bar-bg-color: #0005;
+
+        /* Color theme. */
+        --background-color: #888;
+        --background-bright-color: #888;
+        --surface-color: #888;
+        --surface-bright-color: #888;
+        --primary-color: #888;
+        --primary-bright-color: #888;
+        --secondary-color: #888;
+        --secondary-bright-color: #888;
+        --error-color: #888;
+        --text-light-color: #888;
+        --text-dark-color: #888;
+        --anchor-text-color: #888;
+        --anchor-text-light-color: #888;
+        --scroll-bar-color: #888;
+        --elevation-color: #888;
+
+        --hr-color: #888;
+
+        /* DON'T REMOVE THE FOLLOWING LINE! */
+        /* paste_root_styles_here */
+
+        /* clip_start */
+
+        /* Editable styles */
+        --clickable-navigation-title-border-radius: .3rem;
+        --clickable-navigation-title-font-size: 1.6rem;
+        --clickable-navigation-title-font-weight: 700;
+        --clickable-navigation-title-margin-bottom: .1rem;
+        --clickable-navigation-title-line-height: 1.3rem;
+
+        --clickable-navigation-link-border-radius: .3rem;
+        --clickable-navigation-link-font-size: 1.6rem;
+        --clickable-navigation-link-font-weight: 700;
+        --clickable-navigation-link-margin-bottom: .5rem;
+        --clickable-navigation-link-margin-left: 3rem;
+        --clickable-navigation-link-padding-left: 3rem;
+
+        --document-header-margin-bottom: 3rem;
+
+        --document-title-font-size: 4rem;
+        --document-title-line-height: 1.3;
+        --document-title-font-weight: 400;
+        --document-title-margin-bottom: 2rem;
+
+        --document-description-font-size: 1.6rem;
+        --document-description-line-height: 1;
+        --document-description-font-weight: 100;
+        --document-description-margin-bottom: 3rem;
+
+        --document-section-margin-bottom: 2rem;
+        --document-section-margin-left: 0rem;
+
+        --section-title-font-size: 2.75rem;
+        --section-title-line-height: 1;
+        --section-title-font-weight: 300;
+        --section-title-margin-bottom: 1rem;
+
+        --section-block-margin-bottom: 1rem;
+        --section-block-margin-left: 0rem;
+
+        --block-title-font-size: 1.9rem;
+        --block-title-line-height: 1;
+        --block-title-font-weight: 300;
+        --block-title-margin-bottom: 1rem;
+
+        --block-body-font-size: 1.6rem;
+        --block-body-line-height: 1;
+        --block-body-font-weight: 100;
+        --block-body-margin-left: 1rem;
+        --block-body-margin-bottom: 1rem;
+        
+        --parameters-return-container-margin-top: 1.5rem;
+
+        --parameters-return-title-font-size: 1.8rem;
+        --parameters-return-title-font-weight: 400;
+        --parameters-return-title-line-height: 1;
+        --parameters-return-title-margin-top: 1.5rem;
+
+        --parameters-return-member-font-size: 1.6rem;
+        --parameters-return-member-font-weight: 100;
+        --parameters-return-member-line-height: 1;
+        --parameters-return-member-margin-left: 0rem;
+        /* clip_end */
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      *, *:after, *:before {
+        box-sizing: inherit;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-bright-color) var(--scroll-bar-bg-color);
+      }
+      *::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+      }
+      *::-webkit-scrollbar-track {
+          background: var(--scroll-bar-bg-color);
+      }
+      *::-webkit-scrollbar-thumb {
+          background-color: var(--primary-bright-color);
+      }
+      html {
+        box-sizing: border-box;
+        font-size: 62.5%;
+        user-select: none;
+      }      
+      body {
+        font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-size: 1.6em;
+        font-weight: 300;
+        letter-spacing: .01em;
+        line-height: 1.6;
+        background-color: var(--background-color);
+        color: var(--text-light-color);
+        overflow: hidden;
+      }
+      html, body {
+        height: 100%;
+      }
+      label {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: .5rem;
+      }
+      a {
+        color: var(--anchor-text-color);
+        text-decoration: none;
+        font-weight: 360;
+      }
+      a:hover {
+        color: var(--anchor-text-light-color);
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 300;
+        letter-spacing: -.1rem;
+        margin-bottom: 1rem;
+        margin-top: 0;
+      }
+
+      /* clip_start */
+      h1 {
+        font-size: 4.6rem;
+        line-height: 1.2;
+      }
+      h2 {
+        font-size: 3.6rem;
+        line-height: 1.25;
+      }
+      /* clip_end */
+
+      h3 {
+        font-size: 2.8rem;
+        line-height: 1.3;
+      }
+      h4 {
+        font-size: 2.2rem;
+        letter-spacing: -.08rem;
+        line-height: 1.35;
+      }
+
+      #landing_page {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #landing_page > svg {
+        float: right;
+      }
+
+      h5 {
+        font-size: 10rem;
+        letter-spacing: -.05rem;
+        line-height: .7;
+        margin-bottom: .5rem;
+      }
+      h6 {
+        font-size: 1.64rem;
+        letter-spacing: 0;
+        font-weight: 300;
+        line-height: 1;
+        margin: 0;
+      }
+
+      /* TODO: Revise */
+      code {
+        background: #f4f5f6;
+        border-radius: .4rem;
+        font-size: 86%;
+        margin: 0 .2rem;
+        padding: .2rem .5rem;
+        white-space: nowrap;
+      }
+      pre {
+        margin: 0;
+        overflow-y: hidden;
+        tab-size: 2;
+      }
+      pre > code {
+        border-radius: 0;
+        display: block;
+        padding: 1rem 1.5rem;
+        white-space: pre;
+      }
+
+      /* PAGE AREAS. */
+      #container {
+        display: grid; 
+        grid-auto-columns: 1fr; 
+        grid-template-columns: 175px 8px 1fr; 
+        grid-template-rows: 4.5rem 1fr 2.5rem; 
+        gap: 0px 0px; 
+        grid-template-areas: 
+          "header header header"
+          "navigation drag content"
+          "footer footer footer";
+        background-color: var(--background-color);
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+      #header {
+        grid-area: header;
+        padding: .5rem 0;
+        background-color: var(--background-color);
+      }
+      #footer {
+        grid-area: footer;
+        padding: .25rem 0;
+        background-color: var(--background-color);
+      }
+      #navigation {
+        grid-area: navigation;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: .5rem;
+        border-radius: 5px;
+        background-color: var(--surface-color);
+      }
+      #drag {
+        cursor: ew-resize;
+        grid-area: drag;
+        background-color: var(--background-color);
+      }
+      #content {
+        grid-area: content;
+        overflow-y: scroll;
+        padding: .5rem;
+        border-radius: 5px;
+        background-color: var(--surface-color);
+      }
+      #dgenx {
+        display: inline-block;
+        float: right;
+      }
+
+      /* SVG IMAGE BUTTONS. */
+      .svg-button {
+        border-radius: 18px;
+        border: 6px solid var(--background-color);
+        background-color: var(--background-color);
+        width: 36px;
+        float: right;
+      }
+      .svg-button:hover {
+        border: 6px solid var(--background-bright-color);
+        background-color: var(--background-bright-color);
+        cursor: pointer;
+      }
+      .svg-button:active {
+        scale: .9;
+      }
+      
+      /* MISC STYLES. */
+      .inline { display: inline-block; }
+      .hidden { display: none !important; }
+      .selected { background-color: var(--primary-color); }
+      .outlined { outline: 1px dashed #f00c }
+
+      /* NAVIGATION PANE. */
+      .clickable-navigation-title {
+        border-radius: var(--clickable-navigation-title-border-radius);
+        font-size: var(--clickable-navigation-title-font-size);
+        font-weight: var(--clickable-navigation-title-font-weight);
+        line-height: var(--clickable-navigation-title-line-height);
+        margin-bottom: var(--clickable-navigation-title-margin-bottom);
+      }
+      .clickable-navigation-title:hover {
+        background-color: var(--surface-bright-color);
+      }
+      .clickable-navigation-link {
+        border-radius: var(--clickable-navigation-link-border-radius);
+        font-size: var(--clickable-navigation-link-font-size);
+        font-weight: var(--clickable-navigation-link-font-weight);
+        margin-bottom: var(--clickable-navigation-link-margin-bottom);
+        margin-left: var(--clickable-navigation-link-margin-left);
+        padding: 0;
+        padding-left: var(--clickable-navigation-link-padding-left) !important;
+      }
+      .clickable-navigation-link:not(.selected):hover {
+        background-color: var(--surface-bright-color);
+      }
+      .clickable-navigation-link.selected:hover {
+        background-color: var(--primary-bright-color);
+      }
+      #navigation > label, .collapsable-navigation-container > label {
+        padding: 0 .6rem;
+      }
+
+      /* CONTENT PANE. */
+      /* A document contains a header, and one or more sections. */
+      .document {
+        /* TODO: */
+      }
+      /* A document header contains a title, and a description. */
+      .document-header {
+        margin-bottom: var(--document-header-margin-bottom);
+      }
+      .document-title {
+        font-size: var(--document-title-font-size);
+        line-height: var(--document-title-line-height);
+        font-weight: var(--document-title-font-weight);
+        margin-bottom: var(--document-title-margin-bottom);
+      }
+      .document-description {
+        font-size: var(--document-description-font-size);
+        line-height: var(--document-description-line-height);
+        font-weight: var(--document-description-font-weight);
+        margin-bottom: var(--document-description-margin-bottom);
+        margin-left: var(--document-description-margin-left);
+      }
+      /* A section contains a title, and one or more blocks. */
+      .document-section {
+        margin-bottom: var(--document-section-margin-bottom);
+        margin-left: var(--document-section-margin-left);
+      }
+      .section-title {
+        font-size: var(--section-title-font-size);
+        line-height: var(--section-title-line-height);
+        font-weight: var(--section-title-font-weight);
+        margin-bottom: var(--section-title-margin-bottom);
+      }
+      /* A block contains a title, and a body. */
+      .section-block {
+        margin-bottom: var(--section-block-margin-bottom);
+        margin-left: var(--section-block-margin-left);
+      }
+      .section-block > hr {
+        margin-top: 2rem;
+        border: none;
+        border-bottom: 3px solid var(--hr-color);
+        margin-right: 3rem;
+
+        /* display: none; */
+      }
+      .block-title {
+        font-size: var(--block-title-font-size);
+        line-height: var(--block-title-line-height);
+        font-weight: var(--block-title-font-weight);
+        margin-bottom: var(--block-title-margin-bottom);
+      }
+      .block-body {
+        font-size: var(--block-body-font-size);
+        line-height: var(--block-body-line-height);
+        font-weight: var(--block-body-font-weight);
+        margin-left: var(--block-body-margin-left);
+        margin-bottom: var(--block-body-margin-bottom);
+      }
+
+      .all-parameters-container-content {
+        margin-top: 1.5rem;
+      }
+      .parameters-return-container {
+        margin-top: var(--parameters-return-container-margin-top);
+      }
+      .parameters-return-title {
+        font-size: var(--parameters-return-title-font-size);
+        font-weight: var(--parameters-return-title-font-weight);
+        line-height: var(--parameters-return-title-line-height);
+        margin-top: var(--parameters-return-title-margin-top);
+      }
+      .parameters-return-member {
+        font-size: var(--parameters-return-member-font-size);
+        font-weight: var(--parameters-return-member-font-weight);
+        line-height: var(--parameters-return-member-line-height);
+        margin-top: var(--parameters-return-member-margin-top);
+        margin-left: var(--parameters-return-member-margin-left);
+      }
+      
+      /* clip_start */
+
+      /* JSDOC DEBUG DISPLAY. */
+      .jsdoc-display { /* encapsulates jsdoc-title and jsdoc-container. */
+        background-color: #333;
+        margin-bottom: .5rem;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: top;
+      }
+      .jsdoc-display span { /* Span refuses to align to top if this is included in `jsdoc-display`. */
+        vertical-align: top;
+      }
+      .jsdoc-title {
+        font-weight: 400;
+        margin: 0;
+        line-height: 100%;
+        padding: .5rem;
+        border: 1px solid #555;
+      }
+      .jsdoc-container { /* encapsulates one or more jsdoc-namespace, jsdoc-class , jsdoc-method , jsdoc-member elements. */
+        padding: .5rem;
+        border: 1px solid #555;
+      }
+      /* Colors for kinds of jsdocs. */
+      .jsdoc-namespace { color: #fa2; }
+      .jsdoc-class { color: #ff8; }
+      .jsdoc-method { color: #b8d; }
+      .jsdoc-member { color: #7cf; }
+      .jsdoc-key, .jsdoc-value { /* Common properties for object key/value pairs.*/
+        font-weight: normal;
+        display: inline-block;
+      }
+      /* Colors of object key/value pairs. */
+      .jsdoc-key { color: #6df; }
+      .jsdoc-value { color: #eee; }
+      /* Color various property types. */
+      .jsdoc-string { color: #5d4; }
+      .jsdoc-number { color: #f48; }
+      .jsdoc-boolean { color: #f48; }
+      .jsdoc-array { color: #1af; }
+      .jsdoc-comment { color: #2ae; }
+      .jsdoc-comma { color: #eee; }
+
+      /* HTML RANGE INPUT. NOTE: Only used in style editor. */
+      input[type=range] {
+        -webkit-appearance: none;
+        height: 14px;
+        background: var(--surface-bright-color);
+        outline: none;
+      }
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 12px;
+        height: 14px;
+        background: var(--primary-color);
+        cursor: pointer;
+      }
+      input[type=range]::-moz-range-thumb {
+        border: 0;
+        border-radius: 0;
+        width: 12px;
+        height: 14px;
+        background: var(--primary-color);
+        cursor: pointer;
+      }
+      input[type=range]::-webkit-slider-thumb:hover {
+        background: var(--primary-bright-color);
+      }
+      input[type=range]::-moz-range-thumb:hover {
+        background: var(--primary-bright-color);
+      }
+
+      /* THE CSS STYLE EDITOR. */
+      #style_editor {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 450px;
+        height: 100%;
+        background-color: var(--background-color);
+        overflow-y: hidden;
+        border: 1px solid #0004;
+        line-height: 1;
+        overflow: hidden;
+      }
+      #style_editor_header {
+        padding: .5rem;
+        border-bottom: 1px solid #0004;
+        flex: 0 0 auto;
+      }
+      #style_editor_header > h3 {
+        margin: .5rem;
+      }
+      #style_editor_controls {
+        padding: .5rem;
+        flex: 1 1 auto;
+        font-family: var(--monospace-font);
+        overflow-y: scroll;
+      }
+      #style_editor_controls > hr {
+        margin: 8px 20px;
+        border-bottom: 1px solid var(--text-light-color);
+      }
+      details {
+        font-family: var(--monospace-font);
+        font-size: inherit;
+        margin-bottom: 1rem;
+      }
+      details > summary {
+        list-style-type: '+ ';
+      }
+      details[open] > summary {
+        list-style-type: '- ';
+      }
+      .slider-group {
+        margin-left: 20px;
+        margin-top: .5rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: inherit;
+        line-height: 1;
+        padding: 0;
+      }
+      .slider {
+        display: inline-block;
+        width: 170px;
+        margin: 0;
+        line-height: inherit;
+        vertical-align: top;
+      }
+      .slider-title, .slider-value {
+        display: inline-block;
+        margin: 0;
+        font-size: inherit;
+        font-family: inherit;
+        line-height: inherit;
+        font-weight: 100;
+      }
+      .slider-title {
+        width: 135px;
+      }
+      .slider-value {
+        padding-left: 4px;
+        width: 80px;
+      }
+      .reset-style-button {
+        display: inline-block;
+        font-size: 1rem;
+        line-height: inherit;
+        border-radius: 2px;
+        background-color: var(--surface-color);
+        float: right;
+        padding: 0 5px;
+        padding-top: 2px;
+        font-weight: bold;
+      }
+      .reset-style-button:hover {
+        background-color: var(--surface-bright-color);
+        cursor: pointer;
+      }
+      .reset-style-button:active {
+        scale: .95;
+      }
+      /* clip_end */
+    </style>
+  </head>
+
+  <body oncontextmenu="return false;" ondragstart="return false;">
+    <div id="container">
+
+      <div id="header">
+        <svg id="go_github_button" class="svg-button" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 1.2c-12.5 0-15.3 17.7-3.51 21.6.554.103.734-.242.734-.534v-2.07c-3.09.672-3.73-1.31-3.73-1.31-.81-2.06-2.77-2.28-1.16-2.3 1.98.138 1.98 3.39 4.93 2.07.099-.717.387-1.21.705-1.48-6.45-.738-5.52-6.71-3.92-8.47-.115-.28-.495-1.41.108-2.94 0 0 .933-.298 3.05 1.14 1.77-.493 3.77-.496 5.56 0 2.12-1.44 3.05-1.14 3.05-1.14.604 1.53.224 2.66.109 2.94 1.59 1.73 2.56 7.74-3.93 8.46 1.85 2.25-.243 5.98 1.5 5.64 11.7-3.92 8.97-21.6-3.52-21.6z" fill="var(--text-light-color)"/></svg>
+
+        <svg id="go_dark_button" class="svg-button hidden" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m4.23 19.8c-6.9-6.9-2.01-18.8 7.78-18.8.568 0 1.12.0406 1.65.122-.833.589-1.5 1.36-2 2.3-1.05 1.99-1.29 5.28 1.18 7.75 3.01 3.01 7.81 2.33 10-.824.0812.528.122 1.08.122 1.65 0 9.8-11.9 14.7-18.8 7.78zm15.7-4.58c-2.23.556-5.8.742-8.85-2.3-3.05-3.05-2.86-6.62-2.3-8.85-5.43 2.23-7.39 9.43-2.84 14s11.8 2.59 14-2.84z" fill="var(--text-light-color)"/></svg>
+        <svg id="go_light_button" class="svg-button hidden" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 15c1.68 0 3-1.32 3-3s-1.32-3-3-3-3 1.32-3 3 1.32 3 3 3zm0 2c-2.8 0-5-2.21-5-5 0-2.8 2.21-5 5-5 2.8 0 5 2.21 5 5 0 2.8-2.21 5-5 5zm-10-4c-.57 0-1-.43-1-1s.43-1 1-1h2c.57 0 1 .43 1 1s-.43 1-1 1zm18 0c-.57 0-1-.43-1-1s.43-1 1-1h2c.57 0 1 .43 1 1s-.43 1-1 1zm-8-8c-.57 0-1-.43-1-1v-2c0-.57.43-1 1-1s1 .43 1 1v2c0 .57-.43 1-1 1zm0 18c-.57 0-1-.43-1-1v-2c0-.57.43-1 1-1s1 .43 1 1v2c0 .57-.43 1-1 1zm-6.35-16-1.08-1.05c-.43-.392-.342-1.05 0-1.42.405-.405 1.06-.402 1.42 0l1.05 1.08c.37.402.37.998 0 1.4-.395.43-1.03.34-1.4 0zm12.4 12.4-1.05-1.08c-.37-.405-.37-1.03 0-1.4.395-.43 1.03-.34 1.4 0l1.08 1.05c.43.392.342 1.05 0 1.42-.405.405-1.06.402-1.42 0zm-1.05-12.4c-.43-.395-.34-1.03 0-1.4l1.05-1.08c.392-.43 1.05-.342 1.42 0 .405.405.402 1.06 0 1.42l-1.08 1.05c-.402.37-.998.37-1.4 0zm-12.4 12.4c-.405-.405-.402-1.06 0-1.42l1.08-1.05c.405-.37 1.03-.37 1.4 0 .43.395.34 1.03 0 1.4l-1.05 1.08c-.392.43-1.05.342-1.42 0z" fill="var(--text-light-color)"/></svg>
+
+        <!-- clip_start -->
+        <svg id="save_button" onclick="saveHTML();" class="svg-button" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 18.6 6.4-6.4-1.54-1.54-3.76 3.7v-8.96h-2.2v8.96l-3.76-3.7-1.54 1.54zm0 4.4c-6.09 0-11-4.91-11-11 0-6.08 4.92-11 11-11 5.93 0 11 4.75 11 11 0 6.09-4.91 11-11 11zm0-2.2c4.95 0 8.8-3.85 8.8-8.8 0-4.95-3.85-8.8-8.8-8.8-4.95 0-8.8 3.85-8.8 8.8 0 4.95 3.85 8.8 8.8 8.8z" fill="var(--text-light-color)"/></svg>
+        <svg id="open_style_editor_button" class="svg-button" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m10.2 15.6c-.698 0-1.22-.524-1.22-1.22v-1.22h1.83v.611h2.44v-1.22h-3.06c-.698 0-1.22-.524-1.22-1.22v-1.83c0-.698.524-1.22 1.22-1.22h3.67c.698 0 1.22.524 1.22 1.22v1.22h-1.83v-.611h-2.44v1.22h3.06c.698 0 1.22.524 1.22 1.22v1.83c0 .698-.525 1.22-1.22 1.22zm7.94 0c-.698 0-1.22-.524-1.22-1.22v-1.22h1.83v.611h2.44v-1.22h-3.06c-.698 0-1.22-.524-1.22-1.22v-1.83c0-.698.524-1.22 1.22-1.22h3.67c.698 0 1.22.524 1.22 1.22v1.22h-1.83v-.611h-2.44v1.22h3.06c.698 0 1.22.524 1.22 1.22v1.83c0 .698-.525 1.22-1.22 1.22zm-15.9 0c-.698 0-1.22-.524-1.22-1.22v-4.89c0-.698.524-1.22 1.22-1.22h3.67c.698 0 1.22.524 1.22 1.22v1.22h-1.83v-.611h-2.44v3.67h2.44v-.611h1.83v1.22c0 .698-.525 1.22-1.22 1.22z" fill="var(--text-light-color)"/></svg>
+        <!-- clip_end -->
+
+        <h3 id="heading" class="inline"></h3>
+      </div>
+
+      <div id="navigation"></div>
+
+      <div id="drag"></div>
+
+      <div id="content">
+        <div id="landing_page" class="nonapi">
+          <h5 id="title"></h5>
+          <h6 id="tagline"></h6>
+        </div>
+
+      </div>
+
+      <div id="footer">
+        <span id="credits"></span>
+        <div id="dgenx">Made with <a href="https://github.com/Antix-Development/dgeneration-x" target="_blank">DGeneration-X</a></div>
+      </div>
+      
+    </div> <!-- container. -->
+
+    <!-- clip_start -->
+    <div id="style_editor" class="hidden">
+      <div id="style_editor_header">
+        <h3 class="inline">Style Editor</h3>
+        <svg id="cancel_style_edits_button" class="svg-button" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m8.04 17.5 3.96-3.96 3.96 3.96 1.54-1.54-3.96-3.96 3.96-3.96-1.54-1.54-3.96 3.96-3.96-3.96-1.54 1.54 3.96 3.96-3.96 3.96zm3.96 5.5c-6.09 0-11-4.91-11-11 0-6.32 5.18-11 11-11 6.25 0 11 5.07 11 11 0 5.82-4.68 11-11 11zm0-2.2c4.95 0 8.8-3.85 8.8-8.8 0-4.95-3.85-8.8-8.8-8.8-4.95 0-8.8 3.85-8.8 8.8 0 4.95 3.85 8.8 8.8 8.8z" fill="var(--text-light-color)"/></svg>
+        <svg id="confirm_style_edits_button" class="svg-button" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m10.5 17.1 7.76-7.76-1.54-1.54-6.22 6.22-3.14-3.14-1.54 1.54zm1.54 5.94q-2.28 0-4.29-.866t-3.49-2.35-2.35-3.49-.866-4.29.866-4.29 2.35-3.49 3.49-2.35 4.29-.866 4.29.866 3.49 2.35 2.35 3.49.866 4.29-.866 4.29-2.35 3.49-3.49 2.35-4.29.866zm0-2.2q3.68 0 6.24-2.56t2.56-6.24-2.56-6.24-6.24-2.56-6.24 2.56-2.56 6.24 2.56 6.24 6.24 2.56z" fill="var(--text-light-color)"/></svg>
+      </div>
+      <div id="style_editor_controls">
+        <!-- Editor elements get appended here. -->
+      </div>
+    </div>
+    <!-- clip_end. -->
+
+    <script src=dgenerationx.js></script>
+
+  </body>
+
+</html>
