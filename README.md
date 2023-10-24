@@ -7,7 +7,7 @@ Basically it reads in JavaScript source code files and creates HTML documentatio
 DGeneration-X was initially created to generate documentation for [LittleJS](https://github.com/KilledByAPixel/LittleJS), but is now to be used for generating documentation for my own personal projects. I have made it available to the public on the off chance that somebody might find it of use.
 
 
-## [Live Example](https://antixdevelopment.com/littlejs/docs) of generated documentation
+There is a [live example](https://antixdevelopment.com/littlejs/docs) of generated documentation that you can checkout.
 
 
 ## What's New?
