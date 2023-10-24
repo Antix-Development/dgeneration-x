@@ -444,7 +444,9 @@ createNewMethod = (lines) => {
 
   let declaration = lines.pop();
 
-  //log(declaration);
+  // log(`declaration: ${declaration}`);
+
+  if (declaration.indexOf('this.') === 0) return; // Fix for edge case where properties might be interpretted as methods, when inside a class.
 
   if (declaration.indexOf('constructor') === 0) {
     //log(`class constructor..`);
